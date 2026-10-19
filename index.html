@@ -1,54 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Penggajian Driver OmNigo</title>
+<title>SIPAD OmNigo - Sistem Informasi Penggajian Driver</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7f9;--card:#fff;--tx:#1d2433;--mu:#6b7385;--bd:#e1e4ea;--ac:#2f5bea;--ac2:#e8eeff;--rd:#dc2626;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171d;--card:#1d222b;--tx:#e8ebf2;--mu:#98a1b3;--bd:#2d3441;--ac:#6c8cff;--ac2:#252d45;--rd:#f87171;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#14171d;--card:#1d222b;--tx:#e8ebf2;--mu:#98a1b3;--bd:#2d3441;--ac:#6c8cff;--ac2:#252d45;--rd:#f87171;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:1000px;margin:0 auto;padding:16px}
-h1{font-size:1.4rem;margin:0 0 4px}h2{font-size:1.05rem;margin:0 0 10px}
-.sub{color:var(--mu);margin:0 0 12px;font-size:.9rem}
-nav{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px}
-nav button{white-space:nowrap}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px}
-button,select,input{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:7px 10px;max-width:100%}
+body{margin:0;background:#eef1f6;color:#222;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.hide{display:none!important}
+button,select,input{font:inherit;border:1px solid #cfd6e2;border-radius:4px;padding:7px 10px;max-width:100%;background:#fff;color:#222}
 button{cursor:pointer}
-button.on,button.p{background:var(--ac);color:#fff;border-color:var(--ac)}
-button.x{color:var(--rd);padding:3px 8px}
+button.p{background:#1e5bb8;border-color:#1e5bb8;color:#fff}
+button.x{color:#c62828;padding:2px 8px}
+.lg{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(135deg,#0d3b82,#1e5bb8)}
+.lc{background:#fff;border-radius:8px;padding:28px 24px;width:100%;max-width:360px;text-align:center}
+.lc h1{font-size:1.25rem;margin:8px 0 2px;color:#0d3b82}
+.lc p{margin:0 0 16px;color:#667;font-size:.85rem}
+.lc input{width:100%;margin-bottom:10px}
+.lc button{width:100%;padding:10px}
+.lc .er{color:#c62828;font-size:.85rem;min-height:20px}
+.lg0{font-size:2.4rem}
+header{position:fixed;top:0;left:0;right:0;z-index:20;background:#0d3b82;color:#fff;display:flex;align-items:center;gap:10px;padding:0 12px;padding-top:env(safe-area-inset-top,0px);height:calc(52px + env(safe-area-inset-top,0px))}
+header b{font-size:1.05rem}header .sp{flex:1}
+header button{background:transparent;color:#fff;border-color:#ffffff66}
+#un{font-size:.85rem}
+aside{position:fixed;z-index:15;top:calc(52px + env(safe-area-inset-top,0px));bottom:0;left:0;width:232px;background:#1c2b4a;color:#cfd8ea;overflow-y:auto;transform:translateX(-100%);transition:transform .2s}
+aside.open{transform:none}
+.pf{padding:16px;border-bottom:1px solid #2c3d63;display:flex;gap:10px;align-items:center}
+.av{width:38px;height:38px;border-radius:50%;background:#1e5bb8;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+.pf small{display:block;color:#8fa0c4}
+.mh{padding:12px 16px 4px;font-size:.72rem;letter-spacing:.08em;color:#7f90b5}
+aside a{display:block;padding:11px 16px;color:#cfd8ea;text-decoration:none;border-left:3px solid transparent}
+aside a.on{background:#243659;border-left-color:#4f9cff;color:#fff}
+#ov{position:fixed;inset:0;background:#0006;z-index:10}
+main{padding:calc(68px + env(safe-area-inset-top,0px)) 14px 14px}
+@media(min-width:900px){aside{transform:none}main{margin-left:232px;padding-left:20px;padding-right:20px}#mb,#ov{display:none!important}}
+.bc{color:#778;font-size:.82rem}
+h1.pt{font-size:1.3rem;margin:2px 0 14px;color:#0d3b82}
+.card{background:#fff;border:1px solid #dde3ee;border-top:3px solid #1e5bb8;border-radius:4px;margin-bottom:14px}
+.card h2{font-size:.98rem;margin:0;padding:10px 14px;border-bottom:1px solid #e6ebf3}
+.cb{padding:14px}
+.sub{color:#667;font-size:.85rem;margin:0 0 8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.stat{color:#fff;border-radius:4px;padding:12px 14px}
+.stat b{display:block;font-size:1.3rem}.stat span{font-size:.82rem;opacity:.9}
+.b1{background:#1e5bb8}.b2{background:#2e9d5b}.b3{background:#e69a1a}.b4{background:#c94a4a}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
-.row label{color:var(--mu);font-size:.85rem}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:14px}
-.stat{background:var(--ac2);border-radius:10px;padding:10px}
-.stat b{display:block;font-size:1.15rem}.stat span{color:var(--mu);font-size:.8rem}
+.row label{color:#667;font-size:.85rem}
 .sc{overflow-x:auto;max-width:100%}
-table{border-collapse:collapse;width:100%;font-size:.88rem}
-th,td{padding:6px 10px;border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
-th{color:var(--mu)}td.n,th.n{text-align:right}
-tr.t td{font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:.87rem}
+th{background:#1e5bb8;color:#fff;text-align:left;padding:8px 10px;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid #e6ebf3;white-space:nowrap}
+tr:nth-child(even) td{background:#f6f8fc}
+td.n,th.n{text-align:right}
+tr.t td{font-weight:700;background:#e8eefb}
 .cv{position:relative;height:280px}
-.slip div{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--bd)}
-.slip div:last-child{border:0;font-weight:700;font-size:1.1rem}
-.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
-.g2 label{display:block;color:var(--mu);font-size:.8rem}.g2 input{width:100%}
+.slip div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #cfd6e2}
+.slip div:last-child{border:0;font-weight:700;font-size:1.05rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.g2 label{display:block;color:#667;font-size:.8rem}.g2 input{width:100%}
+footer{color:#889;font-size:.78rem;text-align:center;padding:8px}
 </style>
 </head>
 <body>
-<main>
-<h1>Penggajian Driver OmNigo</h1>
-<p class="sub">Periode Oktober 2026. Data simulasi dari file revisi; perubahan tersimpan di browser ini.</p>
-<nav id="nav"></nav>
-<section id="v"></section>
-</main>
+<div id="login" class="lg"><div class="lc">
+<div class="lg0">🛵</div><h1>SIPAD OmNigo</h1><p>Sistem Informasi Penggajian Driver</p>
+<input id="lu" placeholder="Username" autocomplete="username"><input id="lp" type="password" placeholder="Password" autocomplete="current-password">
+<div class="er" id="le"></div><button class="p" id="lb">Masuk</button>
+<p style="margin:14px 0 0">Akun demo: admin / admin123</p>
+</div></div>
+<div id="app" class="hide">
+<header><button id="mb">☰</button><b>SIPAD OmNigo</b><span class="sp"></span><span id="un">Administrator</span><button id="out">Keluar</button></header>
+<aside id="sb"><div class="pf"><div class="av">A</div><div>Administrator<small>Admin Payroll</small></div></div><div class="mh">MENU UTAMA</div><div id="nav"></div></aside>
+<div id="ov" class="hide"></div>
+<main><div class="bc" id="bc"></div><h1 class="pt" id="pt"></h1><section id="v"></section><footer>© 2026 OmNigo. Data simulasi untuk tugas.</footer></main>
+</div>
 <script>
 const $=i=>document.getElementById(i),E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const rp=n=>"Rp"+Math.round(n).toLocaleString("id-ID");
+const IC={"Dashboard":"🏠","Driver":"👤","Transaksi":"🧾","Payroll":"💰","Slip Gaji":"📄","Pengaturan":"⚙️"};
 const DEF=()=>({
  drivers:[["WD001","Bambang Yadi","OJ"],["WD003","Windah Saur","OJ"],["WD005","Rizky Ilahi","MB"],["WD009","Clarrissa","MB"],["WD008","Rohmat loby","OJ"],["WD010","Zora Maudy","FD"],["WD060","Fajar Maulana","FD"],["WD011","Rina Strawberry","OJ"]].map(([id,n,k])=>({id,n,k})),
  trx:[["WD001",65,4.9],["WD003",105,4.9],["WD005",85,4.9],["WD009",72,4.8],["WD008",110,4.8],["WD010",130,4.9],["WD060",95,4.7],["WD011",90,4.8]].map(([d,o,r],i)=>({id:"TRX00"+(i+1),tgl:"2026-10-01",d,o,r})),
@@ -72,49 +104,53 @@ function tbl(h,rows,nums=[],foot){
   rows.map(r=>`<tr>${r.map(c).join("")}</tr>`).join("")+(foot?`<tr class="t">${foot.map(c).join("")}</tr>`:"")+`</table>`}
 const opt=(a,v)=>a.map(([k,t])=>`<option value="${E(k)}"${k===v?" selected":""}>${E(t)}</option>`).join("");
 const drvOpt=v=>opt(S.drivers.map(d=>[d.id,d.id+" - "+d.n]),v);
+const P=(t,b)=>`<div class="card"><h2>${t}</h2><div class="cb">${b}</div></div>`;
 
 const V={
 Dashboard(){const c=calc(),sum=k=>c.reduce((a,x)=>a+x[k],0);
- return `<div class="stats">${[["Jumlah driver",c.length],["Total order/trip",sum("o")],["Total pendapatan bersih",rp(sum("net"))],["Total insentif",rp(sum("inc"))]].map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("")}</div>
- <div class="card"><h2>Pendapatan bersih per driver</h2><div class="cv"><canvas id="ch"></canvas></div></div>
- <div class="card"><h2>Analisis kinerja</h2><div class="sc">${tbl(["Driver","Order","Target","Capaian","Rating","Evaluasi"],c.map(x=>[E(x.n),x.o,x.sv.g,Math.round(x.pct*100)+"%",x.r.toFixed(1),E(x.ev)]),[1,2,3,4])}</div></div>`},
-Driver(){return `<div class="card"><h2>Tambah driver</h2><div class="row">
- <input id="fi" placeholder="ID (mis. WD012)" size="12"><input id="fn" placeholder="Nama driver" size="18">
- <select id="fk">${opt(Object.entries(S.svc).map(([k,v])=>[k,v.n]))}</select>
- <button class="p" data-a="addD">Tambah</button></div><div class="sub" id="m"></div>
- <div class="sc">${tbl(["ID","Nama","Layanan",""],S.drivers.map(d=>[E(d.id),E(d.n),E((S.svc[d.k]||{}).n||"-"),`<button class="x" data-a="delD" data-i="${E(d.id)}">Hapus</button>`]))}</div></div>`},
-Transaksi(){return `<div class="card"><h2>Tambah transaksi</h2><div class="row">
- <input id="ft" type="date" value="2026-10-01"><select id="fd">${drvOpt()}</select>
+ return `<div class="stats">${[["Jumlah driver",c.length],["Total order/trip",sum("o")],["Pendapatan bersih",rp(sum("net"))],["Total insentif",rp(sum("inc"))]].map(([k,v],i)=>`<div class="stat b${i+1}"><b>${v}</b><span>${k}</span></div>`).join("")}</div>`+
+ P("Pendapatan bersih per driver",`<div class="cv"><canvas id="ch"></canvas></div>`)+
+ P("Analisis kinerja driver",`<div class="sc">${tbl(["Driver","Order","Target","Capaian","Rating","Evaluasi"],c.map(x=>[E(x.n),x.o,x.sv.g,Math.round(x.pct*100)+"%",x.r.toFixed(1),E(x.ev)]),[1,2,3,4])}</div>`)},
+Driver(){return P("Tambah driver",`<div class="row"><input id="fi" placeholder="ID (mis. WD012)" size="12"><input id="fn" placeholder="Nama driver" size="18">
+ <select id="fk">${opt(Object.entries(S.svc).map(([k,v])=>[k,v.n]))}</select><button class="p" data-a="addD">Tambah</button></div><div class="sub" id="m"></div>`)+
+ P("Data driver",`<div class="sc">${tbl(["ID","Nama","Layanan",""],S.drivers.map(d=>[E(d.id),E(d.n),E((S.svc[d.k]||{}).n||"-"),`<button class="x" data-a="delD" data-i="${E(d.id)}">Hapus</button>`]))}</div>`)},
+Transaksi(){return P("Tambah transaksi",`<div class="row"><input id="ft" type="date" value="2026-10-01"><select id="fd">${drvOpt()}</select>
  <input id="fo" type="number" min="1" placeholder="Jumlah order" style="width:130px"><input id="fr" type="number" min="1" max="5" step="0.1" placeholder="Rating" style="width:90px">
- <button class="p" data-a="addT">Tambah</button></div><div class="sub" id="m"></div>
- <div class="sc">${tbl(["ID","Tanggal","Driver","Order","Rating",""],S.trx.map(t=>[E(t.id),E(t.tgl),E(t.d),t.o,t.r,`<button class="x" data-a="delT" data-i="${E(t.id)}">Hapus</button>`]),[3,4])}</div></div>`},
+ <button class="p" data-a="addT">Tambah</button></div><div class="sub" id="m"></div>`)+
+ P("Data transaksi",`<div class="sc">${tbl(["ID","Tanggal","Driver","Order","Rating",""],S.trx.map(t=>[E(t.id),E(t.tgl),E(t.d),t.o,t.r,`<button class="x" data-a="delT" data-i="${E(t.id)}">Hapus</button>`]),[3,4])}</div>`)},
 Payroll(){const c=calc(),s=k=>c.reduce((a,x)=>a+x[k],0);
- return `<div class="card"><h2>Payroll bulanan</h2><p class="sub">Bersih = Dasar + Insentif + Bonus − Admin − Denda</p><div class="sc">${tbl(["Driver","Layanan","Order","Dasar","Insentif","Bonus","Admin","Denda","Bersih"],
+ return P("Payroll bulanan - Oktober 2026",`<p class="sub">Bersih = Dasar + Insentif + Bonus - Admin - Denda</p><div class="sc">${tbl(["Driver","Layanan","Order","Dasar","Insentif","Bonus","Admin","Denda","Bersih"],
  c.map(x=>[E(x.n),E(x.sv.n),x.o,rp(x.base),rp(x.inc),rp(x.bon),rp(x.adm),rp(x.den),rp(x.net)]),[2,3,4,5,6,7,8],
- ["TOTAL","",s("o"),rp(s("base")),rp(s("inc")),rp(s("bon")),rp(s("adm")),rp(s("den")),rp(s("net"))])}</div></div>`},
-"Slip Gaji"(){const c=calc();if(!c.length)return `<div class="card">Belum ada driver.</div>`;
+ ["TOTAL","",s("o"),rp(s("base")),rp(s("inc")),rp(s("bon")),rp(s("adm")),rp(s("den")),rp(s("net"))])}</div>`)},
+"Slip Gaji"(){const c=calc();if(!c.length)return P("Slip gaji","Belum ada driver.");
  const x=c.find(d=>d.id===sel)||c[0];sel=x.id;
  const L=[["Nama driver",E(x.n)],["Jenis layanan",E(x.sv.n)],["Total order/trip",x.o],["Rating rata-rata",x.r.toFixed(1)],["Pendapatan dasar",rp(x.base)],["Insentif",rp(x.inc)],["Bonus target",rp(x.bon)],["Potongan admin",rp(x.adm)],["Denda",rp(x.den)],["PENDAPATAN BERSIH",rp(x.net)]];
- return `<div class="card"><h2>Slip gaji digital</h2><div class="row"><label>Pilih driver</label><select id="ss">${drvOpt(sel)}</select><button data-a="cp">Salin slip</button><span class="sub" id="m" style="margin:0"></span></div>
- <div class="slip"><div><span>Periode</span><span>Oktober 2026</span></div>${L.map(([k,v])=>`<div><span>${k}</span><span>${v}</span></div>`).join("")}</div></div>`},
-Pengaturan(){const P=S.par,i=(a,l,v,st="1")=>`<div><label>${l}</label><input type="number" step="${st}" ${a} value="${v}"></div>`;
- return `<div class="card"><h2>Tarif dan target per layanan</h2><div class="g2">${Object.entries(S.svc).map(([k,v])=>`<div class="card" style="margin:0"><b>${E(v.n)}</b><div style="margin-top:8px">${i(`data-s="${k}.t"`,"Tarif per order (Rp)",v.t)}${i(`data-s="${k}.i"`,"Insentif target (Rp)",v.i)}${i(`data-s="${k}.g"`,"Target order/bulan",v.g)}</div></div>`).join("")}</div></div>
- <div class="card"><h2>Parameter payroll</h2><div class="g2">${i('data-p="bonus"',"Bonus target (Rp)",P.bonus)}${i('data-p="rmin"',"Rating minimum bonus",P.rmin,"0.1")}${i('data-p="adm"',"Potongan admin (Rp)",P.adm)}${i('data-p="den"',"Denda (Rp)",P.den)}${i('data-p="dmin"',"Denda jika order di bawah",P.dmin)}</div>
- <div class="row" style="margin:12px 0 0"><button data-a="rs">Kembalikan data awal</button></div></div>`}
+ return P("Slip gaji digital",`<div class="row"><label>Pilih driver</label><select id="ss">${drvOpt(sel)}</select><button data-a="cp">Salin slip</button><span class="sub" id="m" style="margin:0"></span></div>
+ <div class="slip"><div><span>Periode</span><span>Oktober 2026</span></div>${L.map(([k,v])=>`<div><span>${k}</span><span>${v}</span></div>`).join("")}</div>`)},
+Pengaturan(){const Q=S.par,i=(a,l,v,st="1")=>`<div><label>${l}</label><input type="number" step="${st}" ${a} value="${v}"></div>`;
+ return P("Tarif dan target per layanan",`<div class="g2">${Object.entries(S.svc).map(([k,v])=>`<div><b>${E(v.n)}</b>${i(`data-s="${k}.t"`,"Tarif per order (Rp)",v.t)}${i(`data-s="${k}.i"`,"Insentif target (Rp)",v.i)}${i(`data-s="${k}.g"`,"Target order/bulan",v.g)}</div>`).join("")}</div>`)+
+ P("Parameter payroll",`<div class="g2">${i('data-p="bonus"',"Bonus target (Rp)",Q.bonus)}${i('data-p="rmin"',"Rating minimum bonus",Q.rmin,"0.1")}${i('data-p="adm"',"Potongan admin (Rp)",Q.adm)}${i('data-p="den"',"Denda (Rp)",Q.den)}${i('data-p="dmin"',"Denda jika order di bawah",Q.dmin)}</div>
+ <div class="row" style="margin:12px 0 0"><button data-a="rs">Kembalikan data awal</button></div>`)}
 };
 
 function render(){
- $("nav").innerHTML=Object.keys(V).map(t=>`<button class="${t===tab?"on":""}" data-t="${t}">${t}</button>`).join("");
+ $("nav").innerHTML=Object.keys(V).map(t=>`<a href="#" class="${t===tab?"on":""}" data-t="${t}">${IC[t]}  ${t}</a>`).join("");
+ $("pt").textContent=tab;$("bc").textContent="Beranda / "+tab;
  $("v").innerHTML=V[tab]();
  if(fl&&$("m")){$("m").textContent=fl}fl="";
  if(ch){ch.destroy();ch=null}
- if(tab==="Dashboard"){
-  const c=calc(),cs=getComputedStyle(document.documentElement),tx=cs.getPropertyValue("--mu").trim(),bd=cs.getPropertyValue("--bd").trim(),ac=cs.getPropertyValue("--ac").trim();
-  ch=new Chart($("ch"),{type:"bar",data:{labels:c.map(x=>x.n),datasets:[{label:"Pendapatan bersih (Rp)",data:c.map(x=>x.net),backgroundColor:ac}]},
-   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tx},grid:{color:bd}},y:{ticks:{color:tx},grid:{color:bd}}}}});
+ if(tab==="Dashboard"){const c=calc();
+  ch=new Chart($("ch"),{type:"bar",data:{labels:c.map(x=>x.n),datasets:[{label:"Pendapatan bersih (Rp)",data:c.map(x=>x.net),backgroundColor:"#1e5bb8"}]},
+   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:"#555"},grid:{color:"#e5e7eb"}},y:{ticks:{color:"#555"},grid:{color:"#e5e7eb"}}}}});
  }}
-
-$("nav").onclick=e=>{const b=e.target.closest("[data-t]");if(b){tab=b.dataset.t;render()}};
+const side=o=>{$("sb").classList.toggle("open",o);$("ov").classList.toggle("hide",!o)};
+let ss=false;try{ss=sessionStorage.getItem("sipad")==="1"}catch(e){}
+function show(on){$("login").classList.toggle("hide",on);$("app").classList.toggle("hide",!on);if(on)render()}
+function login(){if($("lu").value.trim()==="admin"&&$("lp").value==="admin123"){try{sessionStorage.setItem("sipad","1")}catch(e){}$("le").textContent="";show(true)}else $("le").textContent="Username atau password salah."}
+$("lb").onclick=login;$("lp").onkeydown=e=>{if(e.key==="Enter")login()};
+$("out").onclick=()=>{try{sessionStorage.removeItem("sipad")}catch(e){}$("lp").value="";side(false);show(false)};
+$("mb").onclick=()=>side(!$("sb").classList.contains("open"));$("ov").onclick=()=>side(false);
+$("nav").onclick=e=>{const b=e.target.closest("[data-t]");if(b){e.preventDefault();tab=b.dataset.t;side(false);render();scrollTo(0,0)}};
 $("v").addEventListener("click",e=>{
  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a;
  if(a==="addD"){const id=$("fi").value.trim().toUpperCase(),n=$("fn").value.trim();
@@ -135,7 +171,7 @@ $("v").addEventListener("change",e=>{const t=e.target;
  if(t.dataset.p)S.par[t.dataset.p]=+t.value;
  else if(t.dataset.s){const[k,f]=t.dataset.s.split(".");S.svc[k][f]=+t.value}
  else return;save()});
-render();
+show(ss);
 </script>
 </body>
-</html>
+ </html>
